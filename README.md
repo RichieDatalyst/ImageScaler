@@ -225,3 +225,165 @@ The reduced image is then upsampled back to the original size for comparison.
 | Checkerboard or grid pattern        | Clearly reveals spatial frequency loss             |
 | Colored object photo                | Helps visualize contribution of RGB channels       |
 
+
+## JPEG Compressor (Python + Tkinter)
+
+A complete grayscale JPEG-like compressor built from scratch using Python, implementing DCT, Quantization, Zigzag Scan, RLE, Huffman Coding, Entropy Measurement, and Image Reconstruction, with GUI visualization.
+
+## Purpose
+
+This assignment demonstrates how the JPEG compression algorithm works internally by implementing each step manually rather than using any library.
+It provides an educational, interactive tool that allows users to visualize quantized DCT blocks, Huffman tables, and compressed vs reconstructed images.
+
+## Algorithms Implemented / Working Principle
+##Preprocessing##
+
+Input image is converted to grayscale.
+
+Image is padded so that its dimensions are multiples of 8.
+
+## JPEG Compression Pipeline
+## 8×8 Blocking
+
+The image is divided into 8×8 blocks as required by the JPEG standard.
+
+## Discrete Cosine Transform (DCT)
+
+Each block is converted from spatial domain → frequency domain.
+
+## Quantization
+
+Each DCT coefficient is divided by a quantization matrix based on user-selected Quality (1–100).
+This is where loss occurs.
+
+## Zigzag Scan
+
+The quantized 8×8 block is converted into a 1×64 vector in zigzag order.
+
+## Run-Length Encoding (RLE) 
+
+Long sequences of zeros in AC coefficients are compressed into (RUN, VALUE) pairs + EOB marker.
+
+## Huffman Coding
+
+All RLE tokens are used to build a custom Huffman table:
+
+1.Symbol frequencies collected
+
+2.Huffman tree built
+
+3.Each symbol assigned a binary code
+
+The encoded bitstream is stored along with the Huffman table.
+
+View:
+
+1.The Huffman symbol list
+
+2.Corresponding Huffman codes
+
+3.Frequency table
+
+## JPEG Decompression Pipeline
+## Huffman Decoding
+
+Converts the compressed Huffman bitstream back into a sequence of RLE (Run-Length Encoded) symbols.
+
+## RLE Decoding
+
+Expands each (RUN, VALUE) pair and reconstructs the zigzag-ordered coefficient vectors.
+
+## Dequantization
+
+Multiplies each quantized DCT coefficient with the corresponding value in the JPEG quantization matrix.
+
+## Inverse DCT
+
+Converts each 8×8 block from the frequency domain back into the spatial domain by applying IDCT.
+
+## Block Assembly
+
+Reconstructed 8×8 blocks are combined to form the final decompressed grayscale image.
+
+## Additional Features
+## Quantized DCT Block Preview
+
+Displays the lossy quantized DCT coefficients for any selected 8×8 block.
+
+## Huffman Table Viewer
+
+Shows all unique RLE symbols with their assigned Huffman codes and frequencies.
+
+## Entropy Metric
+
+Calculates Shannon entropy for:
+
+Original image
+
+Quantized DCT coefficients
+
+Huffman-encoded symbol stream
+
+These metrics help analyze compression effectiveness and data complexity.
+
+## Input Requirements
+
+Accepts any grayscale-compatible image format.
+
+If an RGB image is loaded, it is internally converted to 8-bit grayscale.
+
+## Expected Output
+## 1. Compressed File (.jdemo)
+
+Contains:
+
+Huffman table
+
+DC coefficients (differential encoded)
+
+RLE AC stream
+
+Quantized DCT blocks
+
+Encoded Huffman bitstream
+
+## 2. Reconstructed Image
+
+A lossy grayscale image obtained after dequantization and IDCT.
+
+## 3. Metrics Provided
+
+PSNR (Peak Signal-to-Noise Ratio)
+
+Compression Ratio
+
+Entropy values
+
+## 4. Visual Previews
+
+Original image
+
+Reconstructed image
+
+Quantized DCT block visualization
+
+Huffman table listing
+
+## Flow Diagram
+
+Input Image
+     ↓
+Grayscale
+     ↓
+Split into 8×8 Blocks
+     ↓
+DCT → Quantization → Zigzag → RLE → Huffman Encode
+     ↓
+Compressed Data (.jdemo)
+     ↓
+Huffman Decode → RLE Decode → Dequantize → IDCT
+     ↓
+Reconstructed Image
+
+
+
