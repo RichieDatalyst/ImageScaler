@@ -372,17 +372,17 @@ Huffman table listing
 ## Flow Diagram
 
 Input Image
-     ↓
+↓
 Grayscale
-     ↓
+↓
 Split into 8×8 Blocks
-     ↓
+↓
 DCT → Quantization → Zigzag → RLE → Huffman Encode
-     ↓
+↓
 Compressed Data (.jdemo)
-     ↓
+↓
 Huffman Decode → RLE Decode → Dequantize → IDCT
-     ↓
+↓
 Reconstructed Image
 
 
