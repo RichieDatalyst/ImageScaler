@@ -236,7 +236,7 @@ This assignment demonstrates how the JPEG compression algorithm works internally
 It provides an educational, interactive tool that allows users to visualize quantized DCT blocks, Huffman tables, and compressed vs reconstructed images.
 
 ## Algorithms Implemented / Working Principle
-##Preprocessing##
+## Preprocessing ##
 
 Input image is converted to grayscale.
 
